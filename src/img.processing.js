@@ -58,6 +58,7 @@
         return saida;
     }
 
+    //retorna o valor de um pixel após aplicação do filtro de laplace
     function laplace(points){
         var saida = 0;
         saida += points[0]*0;
@@ -238,15 +239,8 @@
         return nj.array(saida);
     }
 
-    //aplica uma transformação a um pixel
-    /*function apply_transf(i, j, inv_xform){
-        var point = nj.array([i, j, 1]);
-        var saida = multiply(inv_xform, point);
-        saida.set(0, Math.round(saida.get(0)));
-        saida.set(1, Math.round(saida.get(1)));
-        return saida;
-    }*/
 
+    //aplica uma transformação a um pixel
     function apply_transf(i, j, inv_xform){
         var point = nj.array([i, j, 1]);
         var saida = multiply(inv_xform, point);
@@ -294,7 +288,7 @@
         for(var i=0; i<height; i++){
             for(var j=0; j<width; j++){
                 var coords = apply_transf(i, j, inv_xform);
-                if(coords.get(0)> img.shape[0] || coords.get(1) > img.shape[1]/* || coords.get(0) < 0 || coords.get(1) < 0*/)
+                if(coords.get(0)> img.shape[0] || coords.get(1) > img.shape[1])
                     newImg.set(i, j, 0);
                 else
                     newImg.set(i, j, img.get(coords.get(0), coords.get(1)));
